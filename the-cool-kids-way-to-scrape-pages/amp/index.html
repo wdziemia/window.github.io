@@ -4,24 +4,30 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 
-    <title>Welcome</title>
+    <title>Scraping a Feature Together</title>
 
     <link rel="canonical" href="../index.html">
     <meta name="referrer" content="no-referrer-when-downgrade">
     
     <meta property="og:site_name" content="wdziemia">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Welcome">
-    <meta property="og:description" content="This Blog will be about Android stuff, enjoy the Android stuff!">
-    <meta property="og:url" content="//wdziemia.github.io/welcome/">
-    <meta property="article:published_time" content="2012-06-16T14:59:00.000Z">
-    <meta property="article:modified_time" content="2020-12-22T19:57:21.000Z">
+    <meta property="og:title" content="Scraping a Feature Together">
+    <meta property="og:description" content="YQL (Yahoo Query Language) allows you to do amazing things, and has many feeds for a developer to play with. In Peak Stocks, we use it for Option Chains and it works beautifully. An additional feature that we'd thought of was expanding social media feeds. We've gotten a lot of">
+    <meta property="og:url" content="//wdziemia.github.io/the-cool-kids-way-to-scrape-pages/">
+    <meta property="article:published_time" content="2013-03-21T12:24:00.000Z">
+    <meta property="article:modified_time" content="2020-12-22T20:39:13.000Z">
+    <meta property="article:tag" content="YQL">
+    <meta property="article:tag" content="Scraping">
+    <meta property="article:tag" content="Data">
+    
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Welcome">
-    <meta name="twitter:description" content="This Blog will be about Android stuff, enjoy the Android stuff!">
-    <meta name="twitter:url" content="//wdziemia.github.io/welcome/">
+    <meta name="twitter:title" content="Scraping a Feature Together">
+    <meta name="twitter:description" content="YQL (Yahoo Query Language) allows you to do amazing things, and has many feeds for a developer to play with. In Peak Stocks, we use it for Option Chains and it works beautifully. An additional feature that we'd thought of was expanding social media feeds. We've gotten a lot of">
+    <meta name="twitter:url" content="//wdziemia.github.io/the-cool-kids-way-to-scrape-pages/">
     <meta name="twitter:label1" content="Written by">
     <meta name="twitter:data1" content="Walter Dziemianczyk">
+    <meta name="twitter:label2" content="Filed under">
+    <meta name="twitter:data2" content="YQL, Scraping, Data">
     <meta name="twitter:site" content="@wdziemia">
     
     <script type="application/ld+json">
@@ -43,11 +49,12 @@
         "url": "//wdziemia.github.io/author/walter/",
         "sameAs": []
     },
-    "headline": "Welcome",
-    "url": "//wdziemia.github.io/welcome/",
-    "datePublished": "2012-06-16T14:59:00.000Z",
-    "dateModified": "2020-12-22T19:57:21.000Z",
-    "description": "This Blog will be about Android stuff, enjoy the Android stuff!",
+    "headline": "Scraping a Feature Together",
+    "url": "//wdziemia.github.io/the-cool-kids-way-to-scrape-pages/",
+    "datePublished": "2013-03-21T12:24:00.000Z",
+    "dateModified": "2020-12-22T20:39:13.000Z",
+    "keywords": "YQL, Scraping, Data",
+    "description": "YQL (Yahoo Query Language [https://en.wikipedia.org/wiki/Yahoo!_Query_Language])\nallows you to do amazing things, and has many feeds for a developer to play\nwith. In Peak Stocks, we use it for Option Chains and it works beautifully. An\nadditional feature that we&#x27;d thought of was expanding social media feeds. We&#x27;ve\ngotten a lot of requests for twitter and thought, why not the yahoo message\nboards too? This is where YQL comes into play. \n\nYQL has community tables, which aren&#x27;t actual SQL tables. T",
     "mainEntityOfPage": {
         "@type": "WebPage",
         "@id": "//wdziemia.github.io/"
@@ -635,15 +642,15 @@
         <article class="post">
 
             <header class="post-header">
-                <h1 class="post-title">Welcome</h1>
+                <h1 class="post-title">Scraping a Feature Together</h1>
                 <section class="post-meta">
                     Walter Dziemianczyk -
-                    <time class="post-date" datetime="2012-06-16">16 Jun 2012</time>
+                    <time class="post-date" datetime="2013-03-21">21 Mar 2013</time>
                 </section>
             </header>
             <section class="post-content">
 
-                <p>This Blog will be about Android stuff, enjoy the Android stuff!</p>
+                <p>YQL (<a href="https://en.wikipedia.org/wiki/Yahoo!_Query_Language">Yahoo Query Language</a>) allows you to do amazing things, and has many feeds for a developer to play with. In Peak Stocks, we use it for Option Chains and it works beautifully. An additional feature that we'd thought of was expanding social media feeds. We've gotten a lot of requests for twitter and thought, why not the yahoo message boards too? This is where YQL comes into play. </p><p>YQL has community tables, which aren't actual SQL tables. These "tables" are just XML files that scrape pages or using existing feeds and return a response object that is formatted to your liking. Within YQL console, these XML files are passed off a tables making it seem like your actually accessing a database. Anyway, the community tables allow anyone to create their own custom table, be it through the methods mentioned earlier. The finance message boards dont have an open API so i had to use the page scraping method. Having not a lick of experience in doing any of this, it took me a couple of hours to get it going, with countless attempts of trial and error (view the commit history, you'll see). Once i finally got some data to work with, it got easier and easier. The final XML file can be found on my GitHub <a href="https://www.blogger.com/u/1/blog/post/edit/575225956679068977/6613830476794116182#">here</a>. </p><p>The structure of the JavaScript is very simple, its a try-catch block and 2 methods. One method gets the next-page URL and the other loops through the <code>&lt;tr&gt;</code> elements within <code>&lt;tbody&gt;</code> and appends the rows to a <code>&lt;messages&gt;</code> element. </p><figure class="kg-card kg-image-card kg-card-hascaption"><figcaption>Output for <code>GOOG</code></figcaption></figure><p>Within the YQL console, you can have two YQL queries to choose from:</p><pre><code class="language-SQL">SELECT * FROM messageboard WHERE symbol='GOOG';</code></pre><ul><li>The most basic YQL query, giving you page 1 of the message board.</li></ul><pre><code class="language-SQL">SELECT * FROM messageboard WHERE symbol='GOOG' AND page=$URL;</code></pre><ul><li>The second query allows you to pick which page you'd like. The page postfix is given in the initial URL request using the YQL command above (e.g. <code>page = '/mb/forumview/?&amp;bn=12b865d6-8061-30c4-86c1-40adf7076aee&amp;page=2';</code>).</li></ul><p>As it stands, the file only parses through the a message board for a particular stock, getting all the threads within it. While it does provide you the the thread link, there is no way to get a feed for that individual thread.....yet. <br><br>The next step is to create another file that handles an individual thread. This shouldn't be difficult since I have experience from creating this one. </p><p>Until next time, <br><br>W</p>
 
             </section>
 
