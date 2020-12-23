@@ -1,0 +1,58 @@
+{{!< default}}
+{{!-- The tag above means: insert everything in this file
+into the {body} of the default.hbs template --}}
+
+
+{{!-- Featured Post --}}
+{{#is "home"}}
+{{#get "posts" filter="featured:true" limit="1" as |featured_post|}}
+    {{#foreach featured_post}}
+        <article id="banner">
+            <div class="content">
+                <header>
+                    <h1><a href="{{url}}">{{title}}</a></h1>
+                    {{#if custom_excerpt}}<p>{{custom_excerpt}}</p>{{/if}}
+                </header>
+                {{!-- {{content words="42"}} --}}
+                <ul class="actions">
+                    <li><a href="{{url}}" class="button big">Learn More</a></li>
+                </ul>
+            </div>
+            {{#if feature_image}}
+            <a href="{{url}}" class="image object">
+                <img src="{{img_url feature_image}}" alt="{{title}}" />
+            </a>
+            {{/if}}
+        </article>
+    {{/foreach}}
+{{/get}}
+{{/is}}
+
+{{!-- Posts --}}
+<section>
+
+    <header class="major">
+        <h2>Recent posts</h2>
+    </header>
+
+    <section class="posts">
+        {{#foreach posts}}
+            <article>
+
+            <a href="{{url}}">
+                <h3>{{title}}</h3>
+                <p>{{excerpt}}</p>
+                {{!-- <ul class="actions special"> --}}
+                    {{!-- <li><a href="{{url}}" class="button">Full Story</a></li> --}}
+                {{!-- </ul> --}}
+
+            </a>
+            </article>
+        {{/foreach}}
+    </section>
+
+</section>
+
+{{!-- Pagination --}}
+{{pagination}}
+

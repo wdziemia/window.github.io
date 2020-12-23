@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Android Q to the Res-Q!</title>
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="../assets/main/css/main.css?v=780b19055e">
+    <link rel="stylesheet" type="text/css" href="../assets/main/css/prism.css?v=780b19055e"> 
+
+    <link rel="canonical" href="https://medium.com/@wdziemia/android-q-to-the-res-q-9a88733aedda">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <link rel="amphtml" href="amp/index.html">
+    
+    <meta property="og:site_name" content="Wojciech Dziemianczyk">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Android Q to the Res-Q!">
+    <meta property="og:description" content="An intro to RoleManager! And a title with terrible pun for an article that has nothing to do with Resources!">
+    <meta property="og:url" content="https://medium.com/@wdziemia/android-q-to-the-res-q-9a88733aedda">
+    <meta property="og:image" content="//wdziemia.github.io/content/images/downloaded_images/Android-Q-to-the-Res-Q-/1-96egkHkg2_sBtf10nPxOXQ.jpeg">
+    <meta property="article:published_time" content="2019-03-29T00:00:00.000Z">
+    <meta property="article:modified_time" content="2020-12-23T17:14:47.000Z">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Android Q to the Res-Q!">
+    <meta name="twitter:description" content="An intro to RoleManager! And a title with terrible pun for an article that has nothing to do with Resources!">
+    <meta name="twitter:url" content="https://medium.com/@wdziemia/android-q-to-the-res-q-9a88733aedda">
+    <meta name="twitter:image" content="//wdziemia.github.io/content/images/downloaded_images/Android-Q-to-the-Res-Q-/1-96egkHkg2_sBtf10nPxOXQ.jpeg">
+    <meta name="twitter:label1" content="Written by">
+    <meta name="twitter:data1" content="Walter Dziemianczyk">
+    <meta name="twitter:site" content="@wdziemia">
+    <meta name="twitter:creator" content="@wdziemia">
+    <meta property="og:image:width" content="800">
+    <meta property="og:image:height" content="533">
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Wojciech Dziemianczyk",
+        "url": "//wdziemia.github.io/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "//wdziemia.github.io/favicon.ico",
+            "width": 48,
+            "height": 48
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Walter Dziemianczyk",
+        "image": {
+            "@type": "ImageObject",
+            "url": "//wdziemia.github.io/content/images/2020/12/Group-1.png",
+            "width": 433,
+            "height": 433
+        },
+        "url": "//wdziemia.github.io/author/wdziemia/",
+        "sameAs": [
+            "https://twitter.com/wdziemia"
+        ]
+    },
+    "headline": "Android Q to the Res-Q!",
+    "url": "//wdziemia.github.io/android-q-to-the-res-q-/",
+    "datePublished": "2019-03-29T00:00:00.000Z",
+    "dateModified": "2020-12-23T17:14:47.000Z",
+    "image": {
+        "@type": "ImageObject",
+        "url": "//wdziemia.github.io/content/images/downloaded_images/Android-Q-to-the-Res-Q-/1-96egkHkg2_sBtf10nPxOXQ.jpeg",
+        "width": 800,
+        "height": 533
+    },
+    "description": "An intro to RoleManager! And a title with terrible pun for an article that has nothing to do with Resources!\n",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "//wdziemia.github.io/"
+    }
+}
+    </script>
+
+    <meta name="generator" content="Ghost 3.40">
+    <link rel="alternate" type="application/rss+xml" title="Wojciech Dziemianczyk" href="../rss/index.rss">
+
+</head>
+<body class="is-preload post-template">
+
+    <div id="wrapper">
+        <main id="main">
+            <div class="inner">
+
+                
+<section>
+
+    <header class="main content">
+        <span class="date">March 29, 2019</span>
+        <h1>Android Q to the Res-Q!</h1>
+            <p class="content">An intro to RoleManager! And a title with terrible pun for an article that has nothing to do with Resources!
+</p>
+    </header>
+
+    <div class="image main"><img src="../content/images/downloaded_images/Android-Q-to-the-Res-Q-/1-96egkHkg2_sBtf10nPxOXQ.jpeg" alt="Android Q to the Res-Q!"></div>
+
+    <div class="content">
+        <h3 id="an-intro-to-rolemanager-and-a-terrible-pun-that-has-nothing-to-do-with-resources-">An intro to RoleManager! And a terrible pun that has nothing to do with Resources!</h3><p>Android Q Preview was released recently, inviting developers to start testing and supporting new APIs! One of these APIs is <code>RoleManager</code>, and as we can gather from the Q-preview documentation:</p><blockquote>Android Q introduces a standard facility, <em>roles</em>, that allows the OS to grant apps elevated access to system functions based on well-understood use cases. Semantically, each role represents a common use case, such as playing music, viewing photos in a gallery, or sending SMS messages. If an app loses its role, this elevated access is also revoked. (<a href="https://developer.android.com/reference/android/app/role/RoleManager.html">Link</a>)</blockquote><p>In plain english, a role is basically a type of app that executes a specific function (e.g. web browser). The roles exposed in the Q preview are Browser, Dialer, Emergency, Gallery, Home, Music, and SMS. As a developer, you can now request to hold one of these roles for your app, if it falls into one of those buckets.</p><h3 id="why-is-this-api-helpful"><strong>Why is this API helpful?</strong></h3><p>This now lets us proactively query the system to see if our app is the default. If not, it lets us request permission, from the user, to hold that role. We now have more control over checking and responding to these sorts of events. No more silly hacks, no more trying to resolve your package name with the PackageManager, no more searching for options in settings! (🎉🎉🎉)</p><h3 id="what-s-the-catch"><strong>What’s the catch?</strong></h3><p>For the <code>RoleManager</code> to resolve a request properly, your Manifest must specify categories, permissions, or additional intent filters for the role to properly be held. The request will be automatically canceled if you fail to do so. For example, if we have an Internet Browser, we must define the <code>CATEGORY_APP_BROWSER</code> inside the <code>IntentFilter</code> for your Launcher activity. If we do not, and we request a role via <code>RoleManager</code>, that request will be denied without ever prompting the user.</p><h3 id="how-do-we-use-it-well-it-s-quite-simple-"><strong>How do we use it? Well, </strong>It’s quite simple!</h3><p><strong>Step 0</strong>. We add any necessary categories, IntentFilters, or Permissions in your Manifest!</p><p><strong>Step 1. </strong>Answer this question: Do we have an app that fits into a pre-defined role? If yes, let’s go to <strong>Step 2</strong>. If no, let’s enjoy some ice cream!</p><p><strong>Step 2.</strong> Is this Role available on the current system? We can check this via the `RoleManager` class.</p><pre><code class="language-Kotlin">val roleManager = getSystemService(RoleManager::class.java)
+val isRoleAvailable = roleManager.isRoleAvailable(RoleManager.ROLE_BROWSER)</code></pre><p><strong>Step 3.</strong> If this Role is available, is our app holding that role currently? We can check this via the <code>RoleManager</code> too!</p><pre><code class="language-Kotlin">val roleManager = getSystemService(RoleManager::class.java)
+val isRoleHeld = roleManager.isRoleHeld(RoleManager.ROLE_BROWSER)</code></pre><p><strong>Step 4. </strong>If we are not holding this role, is now an appropriate time to ask the user to request access for this role? If yes, we use <code>RoleManager</code> for its magical powers of Intent creation 🎩🐰🎉.</p><pre><code class="language-Kotlin">val roleManager = getSystemService(RoleManager::class.java)
+val roleRequestIntent = roleManager.createRequestRoleIntent(
+        RoleManager.ROLE_BROWSER)
+startActivityForResult(roleRequestIntent, ROLE_REQUEST_CODE)</code></pre><p><strong>Step 5. </strong>If the user grants permission for us to hold that role, onActivityResult will be called with <code>RESULT_OK. RESULT_CANCELED</code> will return if the user denied our request, or if conditions for holding that role have not been met (e.g. missing category in your manifest).</p><pre><code class="language-Kotlin">override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    if (requestCode == ROLE_REQUEST_CODE) {
+        if (resultCode == RESULT_OK) {
+            // Oh yes :)
+        } else {
+            // Oh no :(
+        }
+    }
+}</code></pre><p><strong>Step 6. </strong>Done. From there is just a matter of refreshing our UI to reflect the current state of the system!</p><p>Please take a look at a simple example for requesting <code>ROLE_MUSIC</code><em> </em>in<em> </em><a href="https://github.com/wdziemia/RoleManagerExample"><strong>this Github repo!</strong></a></p><hr><h2 id="secret-secrets-are-no-fun-until-you-tell-every-one-">Secret secrets are no fun, until you tell every one!</h2><p>Or until the official documentation is updated 😁! What am I talking about? There seems to be some undocumented roles that are available. One in particular is <code>android.app.role.ASSISTANT</code>.</p><p><em><strong>Update 04/08/19: </strong>Looks like<strong> </strong><code>ROLE_ASSISTANT</code> has been added to the official </em><a href="https://developer.android.com/reference/android/app/role/RoleManager.html#ROLE_ASSISTANT"><em>docs</em></a><em>! Thanks to </em><a href="https://medium.com/u/b1266eb31a2f"><em>Andrew Kelly</em></a><em> for the heads up!</em></p><p>When testing <a href="https://proandroiddev.com/a-new-tool-for-vqa-on-android-585e6f45ef40">Window</a> on Android Q, I noticed a strange error message:</p><figure class="kg-card kg-image-card"><img src="../content/images/downloaded_images/Android-Q-to-the-Res-Q-/1-7Vc0rv3v-uF_xpVujcVNzg.png" class="kg-image" alt></figure><pre><code class="language-bash">2019–03–00 00:00:00.000 12345–67890/? E/RoleControllerServiceImpl: Package does not qualify for the role, package: com.dziemia.w.window, role: android.app.role.ASSISTANT</code></pre><p>This log statement appears when attempting to select the current version of Window (blue icon) on Android-Q. This led to an adventure through the docs, where surprisingly no Assistant role could be found! So, after some sleuthing🕵️‍♀️, I found that all I needed to do was add an additional <code>IntentFilter</code> with <code>&lt;action/&gt;</code> of <code>ASSIST</code> to my launcher activity in my manifest!</p><pre><code class="language-xml">&lt;intent-filter&gt;
+    &lt;action android:name="android.intent.action.ASSIST" /&gt;
+    &lt;category android:name="android.intent.category.DEFAULT" /&gt;
+    &lt;category android:name="android.intent.category.BROWSABLE" /&gt;
+&lt;/intent-filter&gt;</code></pre><p><strong>A request for permission through the <code>RoleManager</code> will automatically return <code>RESULT_CANCELED</code> if we fail to include the <code>IntentFilter</code>. </strong>If we do everything correctly though, we are greeted with the following:</p><figure class="kg-card kg-image-card"><img src="../content/images/downloaded_images/Android-Q-to-the-Res-Q-/1-pTPBT3h-V7Mp0vYIRw3WEw.png" class="kg-image" alt></figure><p>The great thing about checking roles within <code>RoleManager</code> is that each of them are defined as a <code>String</code>, so my check method is simply:</p><pre><code class="language-kotlin">const val ROLE_ASSISTANT =  "android.app.role.ASSISTANT"
+
+@TargetApi(Build.VERSION_CODES.Q)
+private fun isCurrentAssistAppQ(): Boolean {
+    return with(getSystemService(RoleManager::class.java)){
+        isRoleAvailable(ROLE_ASSISTANT) &amp;&amp; isRoleHeld(ROLE_ASSISTANT)
+    }
+}</code></pre><p>Which makes me feel much more secure over what I had to do previously:</p><pre><code class="language-Kotlin">private fun isCurrentAssistAppBase(): Boolean = Settings.Secure
+        .getString(contentResolver, "assistant")?.let {
+            ComponentName.unflattenFromString(it)?.packageName == packageName
+        } ?: false
+
+fun Context.openAssist() {
+    val openIntent = Intent(Intent.ACTION_MAIN)
+    openIntent.component = ComponentName("com.android.settings", "com.android.settings.Settings\$ManageAssistActivity")
+    openIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+    startActivity(openIntent)
+}</code></pre><p>The main benefit being that I no longer need send user to a different app, potentially having them drop off. I also needed to assume the system includes <code>ManageAssistActivity</code> , which Chrome laptops do not have. Lastly, I don’t need to use some obscure API and pass in a magic variable (“assistant”) to validate the user’s selection within the system settings screen.</p><p>🍋🍋 Easy peasy lemon squeezy! 🍋🍋</p><p>Hope you enjoyed this article! Spam me on Twitter <a href="https://twitter.com/wdziemia">@wdziemia</a>, and as always, happy coding!
+
+</p>
+    </div>
+
+
+    <footer class="post-footer">
+        <div><a href="//twitter.com/wdziemia">— @wdziemia</a></div>
+    </footer>
+    
+    
+
+    
+
+
+</section>
+
+<script>
+    var images = document.querySelectorAll('.kg-gallery-image img');
+    images.forEach(function (image) {
+        var container = image.closest('.kg-gallery-image');
+        var width = image.attributes.width.value;
+        var height = image.attributes.height.value;
+        var ratio = width / height;
+        container.style.flex = ratio + ' 1 0%';
+    })
+</script>
+
+
+            </div>
+        </main>
+
+        <div id="sidebar">
+    <div class="inner">
+
+              
+                <section class="author-header">
+                        <img class="author-profile-image" src="../content/images/2020/12/Group-1.png" alt="Walter Dziemianczyk">
+                    <h5><a href="../author/wdziemia/index.html">Walter Dziemianczyk</a></h5>       
+                        <p class="content">Senior Software Engineer <span class="bull">•</span> <a href="//wdziemia.github.io/android-q-to-the-res-q-/www.twiter.com/NYTimes">@NYTimes</a></p>
+
+                    <div class="author-location icon fa-map-pin">New York, New York</div>
+
+                </section>
+            
+
+            <nav id="menu">
+    <header class="major">
+        <h2>Menu</h2>
+    </header>
+    <ul class="links">
+        <li class="nav-home "><a href="../index.html">Home</a></li>
+    </ul>
+</nav>
+
+        <section id="menu">
+            <header class="major">
+                <h2>Links</h2>
+            </header>
+            <ul class="links">
+                <li><a href="https://github.com/wdziemia">Github</a></li>
+                <li><a href="https://www.linkedin.com/in/walter-dziemianczyk-3308035b/">LinkedIn</a></li>
+                <li><a href="https://twitter.com/wdziemia">Twitter</a></li>
+                <li><a href="https://feedly.com/i/subscription/feed///wdziemia.github.io/rss/index.rss">Linkify</a></li>
+            </ul>
+        </section>
+
+        <section id="menu">
+            <header class="major">
+                <h2>Projects</h2>
+            </header>
+            <ul class="links">
+                <li><a href="https://window.dziemia.com">Window VQA</a></li>
+                <li><a href="https://github.com/wdziemia/wdziemia.github.io">Blog</a></li>
+            </ul>
+        </section>
+
+        <footer id="footer">
+            <p class="copyright">© 2020 Wojciech Dziemianczyk
+        </p></footer>
+
+    </div>
+</div>
+
+    </div>
+
+    <script src="../assets/main/js/jquery.min.js?v=780b19055e"></script>
+    <script src="../assets/main/js/browser.min.js?v=780b19055e"></script>
+    <script src="../assets/main/js/breakpoints.min.js?v=780b19055e"></script>
+    <script src="../assets/main/js/util.js?v=780b19055e"></script>
+    <script src="../assets/main/js/main.js?v=780b19055e"></script>
+    <script src="../assets/main/js/prism.js?v=780b19055e"></script>
+
+    
+
+</body>
+</html>

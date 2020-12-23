@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Avoid repetitive dependency declarations with Gradle Kotlin DSL</title>
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="../assets/main/css/main.css?v=780b19055e">
+    <link rel="stylesheet" type="text/css" href="../assets/main/css/prism.css?v=780b19055e"> 
+
+    <link rel="canonical" href="https://medium.com/@wdziemia/avoid-repetitive-dependency-declarations-with-gradle-kotlin-dsl-97c904704727">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <link rel="amphtml" href="amp/index.html">
+    
+    <meta property="og:site_name" content="Wojciech Dziemianczyk">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Avoid repetitive dependency declarations with Gradle Kotlin DSL">
+    <meta property="og:description" content="Improve how you define dependencies throughout your Android project.">
+    <meta property="og:url" content="https://medium.com/@wdziemia/avoid-repetitive-dependency-declarations-with-gradle-kotlin-dsl-97c904704727">
+    <meta property="og:image" content="//wdziemia.github.io/content/images/downloaded_images/Avoid-repetitive-dependency-declarations-with-Gradle-Kotlin-DSL/1-oNG3VuUDPK4NwoASVw3j6g.png">
+    <meta property="article:published_time" content="2019-09-20T00:00:00.000Z">
+    <meta property="article:modified_time" content="2020-12-23T17:33:46.000Z">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Avoid repetitive dependency declarations with Gradle Kotlin DSL">
+    <meta name="twitter:description" content="Improve how you define dependencies throughout your Android project.">
+    <meta name="twitter:url" content="https://medium.com/@wdziemia/avoid-repetitive-dependency-declarations-with-gradle-kotlin-dsl-97c904704727">
+    <meta name="twitter:image" content="//wdziemia.github.io/content/images/downloaded_images/Avoid-repetitive-dependency-declarations-with-Gradle-Kotlin-DSL/1-oNG3VuUDPK4NwoASVw3j6g.png">
+    <meta name="twitter:label1" content="Written by">
+    <meta name="twitter:data1" content="Walter Dziemianczyk">
+    <meta name="twitter:site" content="@wdziemia">
+    <meta name="twitter:creator" content="@wdziemia">
+    <meta property="og:image:width" content="800">
+    <meta property="og:image:height" content="390">
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Wojciech Dziemianczyk",
+        "url": "//wdziemia.github.io/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "//wdziemia.github.io/favicon.ico",
+            "width": 48,
+            "height": 48
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Walter Dziemianczyk",
+        "image": {
+            "@type": "ImageObject",
+            "url": "//wdziemia.github.io/content/images/2020/12/Group-1.png",
+            "width": 433,
+            "height": 433
+        },
+        "url": "//wdziemia.github.io/author/wdziemia/",
+        "sameAs": [
+            "https://twitter.com/wdziemia"
+        ]
+    },
+    "headline": "Avoid repetitive dependency declarations with Gradle Kotlin DSL",
+    "url": "//wdziemia.github.io/avoid-repetitive-dependency-declarations-with-gradle-kotlin-dsl/",
+    "datePublished": "2019-09-20T00:00:00.000Z",
+    "dateModified": "2020-12-23T17:33:46.000Z",
+    "image": {
+        "@type": "ImageObject",
+        "url": "//wdziemia.github.io/content/images/downloaded_images/Avoid-repetitive-dependency-declarations-with-Gradle-Kotlin-DSL/1-oNG3VuUDPK4NwoASVw3j6g.png",
+        "width": 800,
+        "height": 390
+    },
+    "description": "\nImprove how you define dependencies throughout your Android project.\n",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "//wdziemia.github.io/"
+    }
+}
+    </script>
+
+    <meta name="generator" content="Ghost 3.40">
+    <link rel="alternate" type="application/rss+xml" title="Wojciech Dziemianczyk" href="../rss/index.rss">
+
+</head>
+<body class="is-preload post-template">
+
+    <div id="wrapper">
+        <main id="main">
+            <div class="inner">
+
+                
+<section>
+
+    <header class="main content">
+        <span class="date">September 20, 2019</span>
+        <h1>Avoid repetitive dependency declarations with Gradle Kotlin DSL</h1>
+            <p class="content">
+Improve how you define dependencies throughout your Android project.
+</p>
+    </header>
+
+    <div class="image main"><img src="../content/images/downloaded_images/Avoid-repetitive-dependency-declarations-with-Gradle-Kotlin-DSL/1-oNG3VuUDPK4NwoASVw3j6g.png" alt="Avoid repetitive dependency declarations with Gradle Kotlin DSL"></div>
+
+    <div class="content">
+        <h3 id="improve-how-you-define-dependencies-throughout-your-android-project-">Improve how you define dependencies throughout your Android project.</h3><p>Gradle recently introduced a <a href="https://docs.gradle.org/current/userguide/kotlin_dsl.html">Kotlin DSL</a> to replace the ever-so-popular Groovy DSL which (almost) no one loves. The main benefit when working with build files in the new system, believe it or not, is code completion. Backed by a powerful language like Kotlin, it’s an absolute pleasure dealing with build files now. So, how can Kotlin DSL make our lives easier? Well, let’s start with where we were at before.</p><h2 id="the-old-way">The Old Way</h2><p>With the Groovy DSL, we’d typically have our dependencies littered around the app. If we’re only using a single module in our project, no big deal. Any update to a single dependency is applied to all of our code base.</p><pre><code class="language-groovy">androidTestImplementation 'androidx.test:runner:1.2.0'
+androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'</code></pre><p>Cool, what if we have a multi-module app? Now we have ${modules.size()} the dependencies to have to keep track of! Should we just stick with a search and replace? <strong>No! … </strong>Regex?<strong> No! … </strong>Magic? .. 🤔.. <strong>No!</strong></p><p>In Gradle, we’re able to create predefined scripts which we can reuse(yay!). This means that we’re able to define all our dependencies in a single location. Let’s say we reuse the gradle/ directory within our project and create a dependencies.gradle file within there. We can define dependency versions in one object, and libraries in another, with some nesting for organization.</p><pre><code class="language-groovy">def versions = [  
+  runner          : '1.1.0',  
+  espresso        : '2.0.0-beta2'  
+  supportV4       : '28.0.0'
+]
+
+ext.libraries = [  
+  deviceTests : [    
+    espresso      : "androidx...:${versions.espresso}",      
+    runner        : "androidx...:${versions.runner}"  
+  ],  
+  supportV4       : "com.android....:${versions.supportV4}"
+]</code></pre><p>Now, we just need to make this file “visible” within each module’s build.gradle. We can do that by using apply from!</p><pre><code class="language-groovy">apply from: ‘../gradle/dependencies.gradle’</code></pre><p>This now makes a life a smidge easier in that we now have a single source of truth for all of our dependencies. There’s now only one file to update when it’s time to upgrade all-the-things.</p><pre><code class="language-groovy">...
+apply plugin: 'kotlin-kapt'
+apply from: ‘../gradle/dependencies.gradle’
+
+android {
+  ...
+}
+
+dependencies {
+  androidTestImplementation libraries.deviceTests.runner
+  androidTestImplementation libraries.deviceTests.espresso
+  implementation libraries.supportV4
+}</code></pre><h2 id="how-can-we-make-this-better">How can we make this better?</h2><p><strong>Code completion</strong>! It’s not something that’s too bad .. until we repeat the same process in every new module and make sure we didn't misspell anything which, if you’re anything like me, you will. Side note, shout out to the person who invented spell-check.</p><p>Second, we may <strong>forget to apply the dependencies file</strong>. Why cant Gradle just know it exists! That is .. unless you’re fancy and have a build.gradle template for some auto-copy-pasta … but still. Let’s try and avoid attempting to build and subsequent wall of red text.</p><p>Third, <strong>defining every dependency</strong> .. line by line by line by line by line. This ends up just being a copy-pasta job from other modules. Not terrible, but not great. Example: forgetting to define kapt for moshi-codegen and finding out the hard way that the code ain’t too hot. Let’s always strive for <em>hot code</em> 🔥.</p><h2 id="cue-gradle-kotlin-dsl-">Cue Gradle Kotlin DSL 🎉</h2><p>Using the Kotlin DSL will help us achieve all these goals. <strong>We</strong> <strong>will</strong> get you to <em>hot code</em> 🔥 status. Read on.</p><h3 id="single-source-of-truth">Single Source of Truth</h3><p>We can achieve a similar Groovy DSL setup with having a shared dependencies file by using the buildSrc/ directory in our project. There are <a href="https://medium.com/mindorks/migrating-gradle-build-scripts-to-kotlin-dsl-89788a4e383a">plenty</a> of <a href="https://proandroiddev.com/migrate-to-gradle-kotlin-dsl-in-4-steps-f3e3b27e1f4d">posts</a> about this <a href="https://guides.gradle.org/migrating-build-logic-from-groovy-to-kotlin/">topic</a>, so I won’t go into the thick of it. The outcome of that process should be the same as <strong>The Old Way, </strong>a single source of truth for all dependencies.</p><p>The other main benefit is that any gradle.kts file defined in buildSrc/ is automatically recognized by all of our converted module build.gradle.kts files. This means that any new module will automatically pick-up what’s defined in that directory .. so no more having to use apply from for the dependencies.gradle.kts file! 🎉Win!</p><h3 id="code-completion">Code Completion</h3><p>If the conversion went well, all of our Gradle files are now in Kotlin giving us the full power of the IDE. It will treat our build.gradle.kts as a regular Kotlin classes, giving us code completion out of the box! 🎉 Second Win!</p><figure class="kg-card kg-image-card"><img src="../content/images/downloaded_images/Avoid-repetitive-dependency-declarations-with-Gradle-Kotlin-DSL/1-AcUkFK9xqKmbO4LGUs6Hvg.png" class="kg-image" alt></figure><h3 id="stop-repeating-yourself"><strong>Stop Repeating Yourself</strong></h3><p>Defining the same set of dependencies per each module is a common occurrence. Let’s say we want to introduce rxJava to our project. We probably also want to include rxAndroid and rxKotlin too.</p><pre><code class="language-kts">implementation(Libraries.Threading.rxJava)
+implementation(Libraries.Threading.rxAndroid)
+implementation(Libraries.Threading.rxKotlin)</code></pre><p>We know that these three dependencies will probably be defined together 99.995% of the time for each module. Why can’t we just group all these three together and only call on one function to add them? .. Well that is exactly what we will do using Kotlin method extensions.</p><p>Under the Kotlin DSL hood, the implementation function is an extension function on DependencyHandler. That method then calls on DependencyHandler.add(String, Any). That’s the same for testImplementation, androidTestImplementation, api , etc. We can use that same idea within our Dependencies.gradle.kts file.</p><p>So, let’s look at our current setup:</p><pre><code class="language-kts">object Libraries {
+
+  object Threading {
+
+    object Versions {
+      ...
+    }
+
+    const val rxJava = "io...:rxjava:${Versions.rxJava}"
+    const val rxAndroid = "io...:rxjava:${Versions.rxAndroid}"
+    const val rxKotlin = "io...:rxjava:${Versions.rxKotlin}"
+  }
+
+}</code></pre><p>Within Threading, We can add an extension function on DependencyHandler to only add all Rx dependencies.</p><pre><code class="language-kts">object Libraries {
+  
+  object Threading {
+
+    object Versions {
+      ...
+    }
+
+    const val rxJava = "io...:rxjava:${Versions.rxJava}"
+    const val rxAndroid = "io...:rxjava:${Versions.rxAndroid}"
+    const val rxKotlin = "io...:rxjava:${Versions.rxKotlin}"
+    
+    DependencyHandler.implementRx() {
+      add("implementation", rxJava)
+      add("implementation", rxAndroid)
+      add("implementation", rxAndroid)
+    }
+  }
+}</code></pre><p>This then allows us to call implementRx() within the dependencies block in our build.gradle.kts.</p><pre><code class="language-kts">import Libraries.Threading.implementRx
+
+dependencies {
+  implementRx()
+}</code></pre><p>We can even go a step further, and have an extension function which calls on other extension functions we’ve already defined.</p><pre><code class="language-kts">object Threading {
+  // ...
+  DependencyHandler.implementRx() {
+    // ...
+  }
+  DependencyHandler.implementSomethingElse() {
+    // ...
+  }
+  DependencyHandler.implementThreading() {
+    implementRx()
+    implementSomethingElse()
+  }
+}
+
+// - - - - - - - - - - - - - - -
+
+import Libraries.Threading.implementThreading
+
+dependenies {
+  implementThreading()
+}</code></pre><p>Using this trick brought down a 28 line dependency block to 9 lines for a project I’m working on. <em>&lt;doge&gt;Wow. Win Three. Such Efficient! 🎉&lt;/doge&gt;</em></p><h3 id="upgrading-dependencies">Upgrading Dependencies</h3><p>The process of upgrading dependencies sounds manual and tedious, and thats because it usually is. Having to this means tracking down the latest version through a GitHub README, GitHub Releases, or even browsing through Maven. There is a nifty Gradle plugin which does all that legwork for you so you don’t have to! Go check out <a href="https://github.com/jmfayard/buildSrcVersions">jmfayard/buildSrcVersions</a> for more information!</p><h2 id="the-end">The End</h2><p>With these extension functions and the use of Kotlin, it’s less hassle and simpler to define dependencies. It also helps lessen the learning curve for new engineers learning how to setup their project. Kotlin’s great language features make implementing this straight forward! No need write a Groovy gradle plugin if we have the power of Kotlin powering our build scripts!</p><p>Thanks for reading! Happy coding!
+
+</p>
+    </div>
+
+
+    <footer class="post-footer">
+        <div><a href="//twitter.com/wdziemia">— @wdziemia</a></div>
+    </footer>
+    
+    
+
+    
+
+
+</section>
+
+<script>
+    var images = document.querySelectorAll('.kg-gallery-image img');
+    images.forEach(function (image) {
+        var container = image.closest('.kg-gallery-image');
+        var width = image.attributes.width.value;
+        var height = image.attributes.height.value;
+        var ratio = width / height;
+        container.style.flex = ratio + ' 1 0%';
+    })
+</script>
+
+
+            </div>
+        </main>
+
+        <div id="sidebar">
+    <div class="inner">
+
+              
+                <section class="author-header">
+                        <img class="author-profile-image" src="../content/images/2020/12/Group-1.png" alt="Walter Dziemianczyk">
+                    <h5><a href="../author/wdziemia/index.html">Walter Dziemianczyk</a></h5>       
+                        <p class="content">Senior Software Engineer <span class="bull">•</span> <a href="//wdziemia.github.io/avoid-repetitive-dependency-declarations-with-gradle-kotlin-dsl/www.twiter.com/NYTimes">@NYTimes</a></p>
+
+                    <div class="author-location icon fa-map-pin">New York, New York</div>
+
+                </section>
+            
+
+            <nav id="menu">
+    <header class="major">
+        <h2>Menu</h2>
+    </header>
+    <ul class="links">
+        <li class="nav-home "><a href="../index.html">Home</a></li>
+    </ul>
+</nav>
+
+        <section id="menu">
+            <header class="major">
+                <h2>Links</h2>
+            </header>
+            <ul class="links">
+                <li><a href="https://github.com/wdziemia">Github</a></li>
+                <li><a href="https://www.linkedin.com/in/walter-dziemianczyk-3308035b/">LinkedIn</a></li>
+                <li><a href="https://twitter.com/wdziemia">Twitter</a></li>
+                <li><a href="https://feedly.com/i/subscription/feed///wdziemia.github.io/rss/index.rss">Linkify</a></li>
+            </ul>
+        </section>
+
+        <section id="menu">
+            <header class="major">
+                <h2>Projects</h2>
+            </header>
+            <ul class="links">
+                <li><a href="https://window.dziemia.com">Window VQA</a></li>
+                <li><a href="https://github.com/wdziemia/wdziemia.github.io">Blog</a></li>
+            </ul>
+        </section>
+
+        <footer id="footer">
+            <p class="copyright">© 2020 Wojciech Dziemianczyk
+        </p></footer>
+
+    </div>
+</div>
+
+    </div>
+
+    <script src="../assets/main/js/jquery.min.js?v=780b19055e"></script>
+    <script src="../assets/main/js/browser.min.js?v=780b19055e"></script>
+    <script src="../assets/main/js/breakpoints.min.js?v=780b19055e"></script>
+    <script src="../assets/main/js/util.js?v=780b19055e"></script>
+    <script src="../assets/main/js/main.js?v=780b19055e"></script>
+    <script src="../assets/main/js/prism.js?v=780b19055e"></script>
+
+    
+
+</body>
+</html>

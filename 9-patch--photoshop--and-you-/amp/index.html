@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <title>9-Patch, PhotoShop, and you!</title>
+
+    <link rel="canonical" href="https://medium.com/@wdziemia/9-patch-photoshop-and-you-3a4736772ad3">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta property="og:site_name" content="Wojciech Dziemianczyk">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="9-Patch, PhotoShop, and you!">
+    <meta property="og:description" content="An in-depth tutorial on creating a 9-Patch, from start to finish!">
+    <meta property="og:url" content="https://medium.com/@wdziemia/9-patch-photoshop-and-you-3a4736772ad3">
+    <meta property="og:image" content="//wdziemia.github.io/content/images/2020/12/1_TDmoe9Q-ZSMHjW4OWJoNyg.png">
+    <meta property="article:published_time" content="2017-01-29T00:00:00.000Z">
+    <meta property="article:modified_time" content="2020-12-23T18:35:06.000Z">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="9-Patch, PhotoShop, and you!">
+    <meta name="twitter:description" content="An in-depth tutorial on creating a 9-Patch, from start to finish!">
+    <meta name="twitter:url" content="https://medium.com/@wdziemia/9-patch-photoshop-and-you-3a4736772ad3">
+    <meta name="twitter:image" content="//wdziemia.github.io/content/images/2020/12/1_TDmoe9Q-ZSMHjW4OWJoNyg.png">
+    <meta name="twitter:label1" content="Written by">
+    <meta name="twitter:data1" content="Walter Dziemianczyk">
+    <meta name="twitter:site" content="@wdziemia">
+    <meta name="twitter:creator" content="@wdziemia">
+    <meta property="og:image:width" content="640">
+    <meta property="og:image:height" content="316">
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Wojciech Dziemianczyk",
+        "url": "//wdziemia.github.io/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "//wdziemia.github.io/favicon.ico",
+            "width": 48,
+            "height": 48
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Walter Dziemianczyk",
+        "image": {
+            "@type": "ImageObject",
+            "url": "//wdziemia.github.io/content/images/2020/12/Group-1.png",
+            "width": 433,
+            "height": 433
+        },
+        "url": "//wdziemia.github.io/author/wdziemia/",
+        "sameAs": [
+            "https://twitter.com/wdziemia"
+        ]
+    },
+    "headline": "9-Patch, PhotoShop, and you!",
+    "url": "//wdziemia.github.io/9-patch--photoshop--and-you-/",
+    "datePublished": "2017-01-29T00:00:00.000Z",
+    "dateModified": "2020-12-23T18:35:06.000Z",
+    "image": {
+        "@type": "ImageObject",
+        "url": "//wdziemia.github.io/content/images/2020/12/1_TDmoe9Q-ZSMHjW4OWJoNyg.png",
+        "width": 640,
+        "height": 316
+    },
+    "description": "An in-depth tutorial on creating a 9-Patch, from start to finish!",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "//wdziemia.github.io/"
+    }
+}
+    </script>
+
+    <meta name="generator" content="Ghost 3.40">
+    <link rel="alternate" type="application/rss+xml" title="Wojciech Dziemianczyk" href="../../rss/index.rss">
+
+    <style amp-custom>
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+
+    html {
+        overflow-x: hidden;
+        overflow-y: scroll;
+        font-size: 62.5%;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
+
+    body {
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+        color: #3a4145;
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;
+        font-size: 1.7rem;
+        line-height: 1.55em;
+        font-weight: 400;
+        font-style: normal;
+        background: #fff;
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    p,
+    ul,
+    ol,
+    li,
+    dl,
+    dd,
+    hr,
+    pre,
+    form,
+    table,
+    video,
+    figure,
+    figcaption,
+    blockquote {
+        margin: 0;
+        padding: 0;
+    }
+
+    ul[class],
+    ol[class] {
+        padding: 0;
+        list-style: none;
+    }
+
+    img {
+        display: block;
+        max-width: 100%;
+    }
+
+    input,
+    button,
+    select,
+    textarea {
+        font: inherit;
+        -webkit-appearance: none;
+    }
+
+    fieldset {
+        margin: 0;
+        padding: 0;
+        border: 0;
+    }
+
+    label {
+        display: block;
+        font-size: 0.9em;
+        font-weight: 700;
+    }
+
+    hr {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 1px;
+        border: 0;
+        border-top: 1px solid currentcolor;
+        opacity: 0.1;
+    }
+
+    ::selection {
+        text-shadow: none;
+        background: #cbeafb;
+    }
+
+    mark {
+        background-color: #fdffb6;
+    }
+
+    small {
+        font-size: 80%;
+    }
+
+    sub,
+    sup {
+        position: relative;
+        font-size: 75%;
+        line-height: 0;
+        vertical-align: baseline;
+    }
+    sup {
+        top: -0.5em;
+    }
+    sub {
+        bottom: -0.25em;
+    }
+
+    ul li + li {
+        margin-top: 0.6em;
+    }
+
+    a {
+        color: #1292EE;
+        text-decoration-skip-ink: auto;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        margin: 0;
+        font-weight: 700;
+        color: #121212;
+        line-height: 1.4em;
+    }
+
+    h1 {
+        font-size: 3.4rem;
+        line-height: 1.1em;
+    }
+
+    h2 {
+        font-size: 2.4rem;
+        line-height: 1.2em;
+    }
+
+    h3 {
+        font-size: 1.8rem;
+    }
+
+    h4 {
+        font-size: 1.7rem;
+    }
+
+    h5 {
+        font-size: 1.6rem;
+    }
+
+    h6 {
+        font-size: 1.6rem;
+    }
+
+    amp-img {
+        height: 100%;
+        width: 100%;
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    amp-img img {
+        object-fit: cover;
+    }
+
+    .page-header {
+        padding: 50px 5vmin 30px;
+        text-align: center;
+        font-size: 2rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .page-header a {
+        color: #121212;
+        font-weight: 700;
+        text-decoration: none;
+        font-size: 1.6rem;
+        letter-spacing: -0.1px;
+    }
+
+    .post {
+        max-width: 680px;
+        margin: 0 auto;
+    }
+
+    .post-header {
+        margin: 0 5vmin 5vmin;
+        text-align: center;
+    }
+
+    .post-meta {
+        margin: 1rem 0 0 0;
+        text-transform: uppercase;
+        color: #738a94;
+        font-weight: 500;
+        font-size: 1.3rem;
+    }
+
+    .post-image {
+        margin: 0 0 5vmin;
+    }
+
+    .post-image img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .post-content {
+        padding: 0 5vmin;
+    }
+
+    .post-content > * + * {
+        margin-top: 1.5em;
+    }
+
+    .post-content [id]:not(:first-child) {
+        margin: 2em 0 0;
+    }
+
+    .post-content > [id] + * {
+        margin-top: 1rem;
+    }
+
+    .post-content [id] + .kg-card,
+    .post-content blockquote + .kg-card {
+        margin-top: 40px;
+    }
+
+    .post-content > ul,
+    .post-content > ol,
+    .post-content > dl {
+        padding-left: 1.9em;
+    }
+
+    .post-content hr {
+        margin-top: 40px;
+    }
+
+    .post .post-content hr + * {
+        margin-top: 40px;
+    }
+
+    .post-content amp-img {
+        background-color: #f8f8f8;
+    }
+
+    .post-content blockquote {
+        position: relative;
+        font-style: italic;
+    }
+
+    .post-content blockquote::before {
+        content: "";
+        position: absolute;
+        left: -1.5em;
+        top: 0;
+        bottom: 0;
+        width: 0.3rem;
+        background: #000;
+    }
+
+    .post-content :not(.kg-card):not([id]) + .kg-card {
+        margin-top: 40px;
+    }
+
+    .post-content .kg-card + :not(.kg-card) {
+        margin-top: 40px;
+    }
+
+    .kg-card figcaption {
+        padding: 1.5rem 1.5rem 0;
+        text-align: center;
+        font-weight: 500;
+        font-size: 1.3rem;
+        line-height: 1.4em;
+        opacity: 0.6;
+    }
+
+    .kg-card figcaption strong {
+        color: rgba(0,0,0,0.8);
+    }
+
+    .post-content :not(pre) code {
+        vertical-align: middle;
+        padding: 0.15em 0.4em 0.15em;
+        border: #e1eaef 1px solid;
+        font-weight: 400;
+        font-size: 0.9em;
+        line-height: 1em;
+        color: #dc0050;
+        background: #f0f6f9;
+        border-radius: 0.25em;
+    }
+
+    .post-content > pre {
+        overflow: scroll;
+        padding: 16px 20px;
+        color: #fff;
+        background: #1F2428;
+        border-radius: 5px;
+        box-shadow: 0 2px 6px -2px rgba(0,0,0,.1), 0 0 1px rgba(0,0,0,.4);
+    }
+
+    .kg-embed-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .kg-image-card img {
+        margin: auto;
+    }
+
+    .kg-gallery-card + .kg-gallery-card {
+        margin-top: 0.75em;
+    }
+
+    .kg-gallery-container {
+        position: relative;
+    }
+
+    .kg-gallery-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .kg-gallery-image {
+        width: 100%;
+        height: 100%;
+    }
+
+    .kg-gallery-row:not(:first-of-type) {
+        margin: 0.75em 0 0 0;
+    }
+
+    .kg-gallery-image:not(:first-of-type) {
+        margin: 0 0 0 0.75em;
+    }
+
+    .kg-bookmark-card,
+    .kg-bookmark-publisher {
+        position: relative;
+    }
+
+    .kg-bookmark-container,
+    .kg-bookmark-container:hover {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row-reverse;
+        color: currentColor;
+        background: rgba(255,255,255,0.6);
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;
+        text-decoration: none;
+        border-radius: 5px;
+        box-shadow: 0 2px 6px -2px rgba(0, 0, 0, 0.1), 0 0 1px rgba(0, 0, 0, 0.4);
+        overflow: hidden;
+    }
+
+    .kg-bookmark-content {
+        flex-basis: 0;
+        flex-grow: 999;
+        padding: 20px;
+        order: 1;
+    }
+
+    .kg-bookmark-title {
+        font-weight: 600;
+        font-size: 1.5rem;
+        line-height: 1.3em;
+    }
+
+    .kg-bookmark-description {
+        display: -webkit-box;
+        max-height: 45px;
+        margin: 0.5em 0 0 0;
+        font-size: 1.4rem;
+        line-height: 1.55em;
+        overflow: hidden;
+        opacity: 0.8;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+
+    .kg-bookmark-metadata {
+        margin-top: 20px;
+    }
+
+    .kg-bookmark-metadata {
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+        font-size: 1.3rem;
+        line-height: 1.3em;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .kg-bookmark-description {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+    }
+
+    .kg-bookmark-metadata amp-img {
+        width: 18px;
+        height: 18px;
+        max-width: 18px;
+        max-height: 18px;
+        margin-right: 10px;
+    }
+
+    .kg-bookmark-thumbnail {
+        display: flex;
+        flex-basis: 20rem;
+        flex-grow: 1;
+        justify-content: flex-end;
+    }
+
+    .kg-bookmark-thumbnail amp-img {
+        max-height: 200px;
+    }
+
+    .kg-bookmark-author {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .kg-bookmark-publisher::before {
+        content: "•";
+        margin: 0 .5em;
+    }
+
+    .kg-width-full.kg-card-hascaption {
+        display: grid;
+        grid-template-columns: inherit;
+    }
+
+    .post-content table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    .post-content th {
+        padding: 0.5em 0.8em;
+        text-align: left;
+        font-size: .75em;
+        text-transform: uppercase;
+    }
+
+    .post-content td {
+        padding: 0.4em 0.7em;
+    }
+
+    .post-content tbody tr:nth-child(2n + 1) {
+        background-color: rgba(0,0,0,0.1);
+        padding: 1px;
+    }
+
+    .post-content tbody tr:nth-child(2n + 2) td:last-child {
+        box-shadow:
+            inset 1px 0 rgba(0,0,0,0.1),
+            inset -1px 0 rgba(0,0,0,0.1);
+    }
+
+    .post-content tbody tr:nth-child(2n + 2) td {
+        box-shadow: inset 1px 0 rgba(0,0,0,0.1);
+    }
+
+    .post-content tbody tr:last-child {
+        border-bottom: 1px solid rgba(0,0,0,.1);
+    }
+
+    .page-footer {
+        padding: 60px 5vmin;
+        margin: 60px auto 0;
+        text-align: center;
+        background-color: #f8f8f8;
+    }
+
+    .page-footer h3 {
+        margin: 0.5rem 0 0 0;
+    }
+
+    .page-footer p {
+        max-width: 500px;
+        margin: 1rem auto 1.5rem;
+        font-size: 1.7rem;
+        line-height: 1.5em;
+        color: rgba(0,0,0,0.6)
+    }
+
+    .powered {
+        display: inline-flex;
+        align-items: center;
+        margin: 30px 0 0;
+        padding: 6px 9px 6px 6px;
+        border: rgba(0,0,0,0.1) 1px solid;
+        font-size: 12px;
+        line-height: 12px;
+        letter-spacing: -0.2px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+        font-weight: 500;
+        color: #222;
+        text-decoration: none;
+        background: #fff;
+        border-radius: 6px;
+    }
+
+    .powered svg {
+        height: 16px;
+        width: 16px;
+        margin: 0 6px 0 0;
+    }
+
+    @media (max-width: 600px) {
+        body {
+            font-size: 1.6rem;
+        }
+        h1 {
+            font-size: 3rem;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+        }
+    }
+
+    @media (max-width: 400px) {
+        h1 {
+            font-size: 2.6rem;
+            line-height: 1.15em;
+        }
+        h2 {
+            font-size: 2rem;
+            line-height: 1.2em;
+        }
+        h3 {
+            font-size: 1.7rem;
+        }
+    }
+    </style>
+
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+
+    
+
+</head>
+
+<body class="amp-template">
+    <header class="page-header">
+        <a href="../../index.html">
+                Wojciech Dziemianczyk
+        </a>
+    </header>
+
+    <main class="content" role="main">
+        <article class="post">
+
+            <header class="post-header">
+                <h1 class="post-title">9-Patch, PhotoShop, and you!</h1>
+                <section class="post-meta">
+                    Walter Dziemianczyk -
+                    <time class="post-date" datetime="2017-01-29">29 Jan 2017</time>
+                </section>
+            </header>
+            <figure class="post-image">
+                <amp-img src="//wdziemia.github.io/content/images/2020/12/1_TDmoe9Q-ZSMHjW4OWJoNyg.png" width="600" height="340" layout="responsive"></amp-img>
+            </figure>
+            <section class="post-content">
+
+                <h3></h3><h3 id="what-s-all-this-about">What’s all this about?</h3><p>This article will teach you all about creating a 9-patch with PhotoShop! This article is targeted towards devs who are pretty familiar with using these drawables but lack in photoshop-fu. I wrote this tutorial a while ago but might as well get it out there instead of it collecting digital dust!</p><h3 id="what-is-9-patch-and-how-does-it-compare-with-xml-shape-drawables">What is 9-Patch and how does it compare with XML Shape drawables?</h3><p>9-Patch let’s you create scalable raster graphics for all your UI components! They come in handy when you want to theme your UI and get a custom look.</p><p>You may be asking yourself, why can’t I just create an XML shape drawable? You certainly could but things like overdraw come into play if you create one with multiple overlapping shapes. For example, say we have the following code:</p><pre><code class="language-xml">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;layer-list xmlns:android="//schemas.android.com/apk/res/android"&gt;
+
+    &lt;item&gt;
+        &lt;shape&gt;
+            &lt;solid android:color="@android:color/white"/&gt;
+        &lt;/shape&gt;
+    &lt;/item&gt;
+
+     &lt;item&gt;
+        &lt;shape 
+            android:left="1dp" 
+            android:top="1dp"
+            android:right="1dp"
+            android:bottom="1dp"&gt;
+            &lt;solid android:color="@android:color/black"/&gt;
+        &lt;/shape&gt;
+    &lt;/item&gt;
+
+&lt;/layer-list&gt;</code></pre><p>Overdraw is measured by the number of times the system takes to draw what’s on screen. If we have a rectangle with a stroke, like the example above, that counts as two drawing passes. The more drawing passes you have, the more time it takes to render your view hierarchy. It may not seem like a big deal now, but it becomes important when you want to have some silky smooth scrolling in your ListView/RecyclerView.</p><p>What would I recommend XML shapes for? Well, anything that can be accomplished in a single drawing pass. For example, I tend to implement some gradients within my designs. XML shapes work perfectly in that case as it save time w/ exporting assets. You can also use that drawable anywhere and are not restricted by the dimensions of your view if you were to use a PNG.</p><h3 id="let-s-get-started-boot-up-photoshop-">Let’s get started, Boot up PhotoShop!</h3><p>Let’s make a simple looking button for our super-duper-expert-ace interface. First things first, make sure the units for your rulers is set to <strong>Pixels</strong>. This can be found in (<strong>File &gt; Preferences &gt; Units &amp; Rulers &gt; Units</strong>)</p><p><strong>Step 1. Create a new file!</strong><br>Hit <strong>File &gt; New</strong> (<em>⌘N) </em>and<em> </em>create a <strong>64px x 64px </strong>image at a resolution of 72ppi. You can name it whatever you’d like (adding the .9 doesn’t matter just yet).</p><figure class="kg-card kg-image-card kg-card-hascaption"><figcaption>Create a 64px by 64px image @ 72ppi.</figcaption></figure><p><strong>Step 2. It’s so empty, let’s set up our canvas!</strong></p><figure class="kg-card kg-image-card kg-card-hascaption"><figcaption>Our new canvas!</figcaption></figure><p>We have our empty canvas on screen now. First we need some rulers! Rulers help us align our object with the pixel grid. This let’s us keep nice crisp edges, which is essential for a clean looking UI. Let’s use these bad boys! Do this by hitting <strong>View &gt; Rulers (</strong><em>⌘R).</em></p><figure class="kg-card kg-image-card"></figure><p>You can now place a guide by dragging from a ruler on to the canvas. (Tip: Hold shift while dragging to have it snap to the pixel grid). You could also hit <strong>View &gt; New Guide </strong>and manually enter the position of each guide.</p><p>Your task: Put a guide all along the border and another four 8px inside our canvas. You should end up with this:</p><figure class="kg-card kg-image-card"></figure><p><strong>Step 3. Let’s make some stuff, eh? </strong><em>( I’m not Canadian, I’m sorry ☹ )</em></p><p>Find the Rectangle tool(<em>U</em>) in your Tools menu <strong>(Window &gt; tools)</strong>. It may be hidden, so find the button that looks like a 2D shape, click and hold to expose a popup menu and hover over <strong>Rectangle Tool. </strong>Release<strong>.</strong></p><p></p>
+<p>Once you have that selected, click and drag from top-left intersection of our inner guides to the bottom right of the inner. This should of make a new layer in our Layers window. You can expose this window by hitting <strong>Window &gt; Layers </strong>(fn F7).</p><figure class="kg-card kg-image-card"></figure><p>Now that we have a our white square, let’s add a border and shadow around it. Right click the “Shape 1” layer and select <strong>Blending Options</strong>.</p><figure class="kg-card kg-image-card"></figure><p>Let’s check the <strong>Drop Shadow </strong>option from the left menu. Let’s also add a dark-gray <strong>Stroke</strong> on the inside of our rectangle (make sure your settings are the same!).</p><figure class="kg-card kg-image-card kg-card-hascaption"><figcaption>Stroke color in the picture is light-gray, pick a darker gray as light-gray will blend with our shadow.</figcaption></figure><p>The (almost) finished product is as follows. You should have something like this:</p><figure class="kg-card kg-image-card kg-card-hascaption"><figcaption>White background added to show the shadow.</figcaption></figure><p><strong>Step 3. Let’s put the .9 in .9.png!</strong><br>This is how a 9-Patch works, and is the most important part. We must now designate the fill and repeat parts of the image. The <strong>1px</strong> border of our image is read by the system and it is imperative that no pixel in that border be filled for anything other than our markers. The <strong>left</strong> and <strong>top</strong> border designates which part of the<strong> image is repeated</strong>. The <strong>right</strong> and <strong>bottom</strong> designates the <strong>fill</strong>.</p><p>We have more than enough space around the border, so we don’t need to expand our canvas. If you ever do, you can hit <strong>Image &gt; Canvas Size</strong> (<em>⌥⌘C) </em>and add <strong>2px</strong> to the width and <strong>2px</strong> to the height.</p><p>Let’s clear our Guides (<strong>View &gt; Clear Guides</strong>) and add 4 new ones, <strong>1 px</strong> from each edge.</p><figure class="kg-card kg-image-card"></figure><p>Let’s set our<strong> foreground color </strong>to<strong> black(#000000) </strong>in our<strong> </strong>Tools window<strong>, </strong>and then select the Rectangular Marquee Tool. We also need to create a <strong>new layer </strong>for our markers (<strong>make sure it is selected).</strong></p><p><br>
+Rectangular Marquee Tool</p>
+<p><br>
+Foreground is black</p>
+<p><br>
+Create &amp; Select the new Layer</p>
+<p>Now, let’s <strong>select the middle 8 Pixels</strong> on the<strong> left edge</strong> with the marquee tool. Hover over the left guide, click and drag left + down/up. This area should have some moving lines around it. Release the cursor to make a selection and Press <strong>G</strong> (Paint bucket). Our cursor should now be a Paint bucket! Click into this selected area to fill it with the foreground color(black). <strong>Do the same thing for the top edge! </strong>Your edges should look something like this:</p><figure class="kg-card kg-image-card kg-card-hascaption"><figcaption>The pink was added to show you the area that the system will use to scale our image vertically and horizontally.</figcaption></figure><p>Our fill are the opposite edges. These borders tells the system where the content goes. If we are placing this graphic as the background for an ImageView, this area indicates where our image will be placed. Select<strong> the area that are one pixel below/above the stroke, for both the bottom and the right edge. </strong>You should end up with something like this:</p><figure class="kg-card kg-image-card"></figure><p>So, if we place an Image in that fill, it would look like the following:</p><figure class="kg-card kg-image-card"></figure><p>All thats left is to save our image into its respective bucket. Go to <strong>File &gt; Save for Web &amp; Devices.</strong> Hit Save.</p><figure class="kg-card kg-image-card"></figure><p>Save the image into its respective bucket (XHDPI) and <strong>make sure to add the .9 between the file name and png file extension</strong>! It is <strong>very important</strong> that you do this or the system will not recognize that you are using a 9-Patch!</p><figure class="kg-card kg-image-card"></figure><p>All thats left is reference it in some or code using <strong>@drawable/btn_super_duper (XML) </strong>or<strong> R.drawable.btn_super_duper (Java)</strong></p><p>Our final graphic:</p><p></p>
+<h3 id="final-words">Final words</h3><p>I hope you found this tutorial/article(or tutor-icle…brilliant) helpful! Until next time!</p><p>Thanks!
+
+</p>
+
+            </section>
+
+        </article>
+    </main>
+    <footer class="page-footer">
+        <h3>Wojciech Dziemianczyk</h3>
+        <p><a href="../../index.html">Read more posts →</a></p>
+        <a class="powered" href="https://ghost.org" target="_blank" rel="noopener"><svg xmlns="//www.w3.org/2000/svg" viewbox="0 0 156 156"><g fill="none" fill-rule="evenodd"><rect fill="#15212B" width="156" height="156" rx="27"></rect><g transform="translate(36 36)" fill="#F6F8FA"><path d="M0 71.007A4.004 4.004 0 014 67h26a4 4 0 014 4.007v8.986A4.004 4.004 0 0130 84H4a4 4 0 01-4-4.007v-8.986zM50 71.007A4.004 4.004 0 0154 67h26a4 4 0 014 4.007v8.986A4.004 4.004 0 0180 84H54a4 4 0 01-4-4.007v-8.986z"></path><rect y="34" width="84" height="17" rx="4"></rect><path d="M0 4.007A4.007 4.007 0 014.007 0h41.986A4.003 4.003 0 0150 4.007v8.986A4.007 4.007 0 0145.993 17H4.007A4.003 4.003 0 010 12.993V4.007z"></path><rect x="67" width="17" height="17" rx="4"></rect></g></g></svg> Published with Ghost</a>
+    </footer>
+    
+</body>
+</html>

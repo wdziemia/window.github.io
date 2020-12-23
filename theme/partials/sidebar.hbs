@@ -1,0 +1,59 @@
+<div id="sidebar">
+    <div class="inner">
+
+        {{!-- Header --}}
+        {{#get "authors" limit="1" as |ator|}}
+              {{#if ator}}{{#foreach ator}}
+                <section class="author-header">
+                    {{#if profile_image}}
+                        <img class="author-profile-image" src="{{profile_image}}" alt="{{name}}" />
+                    {{/if}}
+                    <h5><a href="{{url}}">{{name}}</a></h5>       
+                    {{#if bio}}
+                        <p class="content">{{bio}} <span class="bull">&bull;</span> <a href="www.twiter.com/NYTimes">@NYTimes</a></p>
+                    {{/if}}
+
+                    {{#if location}}
+                    <div class="author-location icon fa-map-pin">{{location}}</div>
+                    {{/if}}
+
+                </section>
+            {{/foreach}}{{/if}}
+        {{/get}}
+
+        {{!-- Nav - partials/navigation.hbs --}}
+        {{#if @site.navigation}}
+            {{navigation}}
+        {{/if}}
+
+        {{!-- Links --}}
+        <section id="menu">
+            <header class="major">
+                <h2>Links</h2>
+            </header>
+            <ul class="links">
+                <li><a href="https://github.com/wdziemia">Github</a></li>
+                <li><a href="https://www.linkedin.com/in/walter-dziemianczyk-3308035b/">LinkedIn</a></li>
+                <li><a href="https://twitter.com/wdziemia">Twitter</a></li>
+                <li><a href="https://feedly.com/i/subscription/feed/{{@site.url}}/rss/index.rss">Linkify</a></li>
+            </ul>
+        </section>
+
+        {{!-- Projects --}}
+        <section id="menu">
+            <header class="major">
+                <h2>Projects</h2>
+            </header>
+            <ul class="links">
+                <li><a href="https://window.dziemia.com">Window VQA</a></li>
+                <li><a href="https://github.com/wdziemia/wdziemia.github.io">Blog</a></li>
+            </ul>
+        </section>
+
+        {{!-- Footer --}}
+        <footer id="footer">
+            <p class="copyright">&copy; 2020 {{@site.title}}
+        </footer>
+
+    </div>
+</div>
