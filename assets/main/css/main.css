@@ -267,7 +267,7 @@ h6 a {
     border-bottom: 0;
 }
 h1 {
-    font-size: 4em;
+    font-size: 2.5em;
     margin: 0 0 0.5em 0;
     line-height: 1.1;
 }
@@ -288,12 +288,12 @@ h6 {
 }
 @media screen and (max-width: 1680px) {
     h1 {
-        font-size: 3.5em;
+        font-size: 2.5em;
     }
 }
 @media screen and (max-width: 980px) {
     h1 {
-        font-size: 3.25em;
+        font-size: 2.5em;
     }
 }
 @media screen and (max-width: 736px) {
@@ -336,12 +336,13 @@ blockquote {
 }
 pre {
     -webkit-overflow-scrolling: touch;
-    font-family: "Courier New", monospace;
-    font-size: 0.9em;
-    margin: 0 0 2em 0;
-    padding: 1em;
-    border-radius: .5em;
+    font-family: Menlo,ui-monospace,SFMono-Regular,Monaco,Consolas,Liberation Mono,Courier New,monospace;
+    font-size: 1em;
     background: #121212;
+    padding: 1em;
+    margin: .5em 0;
+    overflow: auto;
+    border-radius: 0.3em;
 }
 code, pre {
     font-family: Menlo,ui-monospace,SFMono-Regular,Monaco,Consolas,Liberation Mono,Courier New,monospace;
@@ -1487,7 +1488,7 @@ article.special {
 }
 header p {
     font-family: "Inter", serif;
-    font-size: 1em;
+    font-size: 1.3em;
     font-weight: 400;
     margin-top: -0.5em;
 }
@@ -2326,16 +2327,40 @@ button:disabled,
     -webkit-flex-shrink: 1;
     -ms-flex-shrink: 1;
     flex-shrink: 1;
-    margin: 0 0 6em 6em;
+    margin: 0 0 2em 6em;
     position: relative;
     width: calc(33.33333% - 6em);
 }
+.posts div.post-image {
+    width: 100%;
+    border-radius: .5em;
+    overflow: hidden;
+    background: tomato;
+    height: 10em;
+    margin-bottom: 1em;
+}
+.posts img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+.posts h3 {
+    margin-bottom: .25em;
+}
+
 .posts a {
-    color: black;
+    color: #7f888f;
     -webkit-tap-highlight-color: transparent;
 }
+.posts p.time {
+    color: rgba(127, 136, 143, .6);
+    margin-bottom: 0;
+}
+.posts p {
+    margin: 0 0 .5em 0;
+}
 .posts article:before {
-    background: rgba(210, 215, 217, 0.75);
     content: "";
     display: block;
     height: calc(100% + 6em);
@@ -2345,7 +2370,6 @@ button:disabled,
     width: 1px;
 }
 .posts article:after {
-    background: rgba(210, 215, 217, 0.75);
     bottom: -3em;
     content: "";
     display: block;
@@ -2353,9 +2377,6 @@ button:disabled,
     position: absolute;
     right: 0;
     width: calc(100% + 6em);
-}
-.posts article > :last-child {
-    margin-bottom: 0;
 }
 .posts article .image {
     display: block;
@@ -2390,10 +2411,10 @@ button:disabled,
 }
 @media screen and (max-width: 1680px) {
     .posts article {
-        width: calc(50% - 6em);
+        width: calc(33.3333% - 6em);
     }
     .posts article:nth-last-child(3) {
-        margin-bottom: 6em;
+        margin-bottom: 0;
     }
 }
 @media screen and (min-width: 481px) and (max-width: 1680px) {
@@ -2482,12 +2503,12 @@ button:disabled,
     width: 100%;
 }
 #main > .inner {
-    padding: 0 6em 0.1em 6em;
+    padding: 6em 6em 0.1em 6em;
     margin: 0 auto;
     max-width: 110em;
 }
 #main > .inner > section {
-    padding: 6em 0 4em 0;
+    padding: 0 0 0 0;
     border-top: solid 2px rgba(210, 215, 217, 0.75);
 }
 #main > .inner > section:first-of-type {
@@ -2495,26 +2516,26 @@ button:disabled,
 }
 @media screen and (max-width: 1680px) {
     #main > .inner {
-        padding: 0 5em 0.1em 5em;
+        padding: 6em 6em 6em 6em;
     }
     #main > .inner > section {
-        padding: 5em 0 3em 0;
+        padding: 0 0 0 0;
     }
 }
 @media screen and (max-width: 1280px) {
     #main > .inner {
-        padding: 0 4em 0.1em 4em;
+        padding: 4em 4em 4em 4em;
     }
     #main > .inner > section {
-        padding: 4em 0 2em 0;
+        padding: 0 0 0 0;
     }
 }
 @media screen and (max-width: 736px) {
     #main > .inner {
-        padding: 0 2em 0.1em 2em;
+        padding: 2em 2em 2em 2em;
     }
     #main > .inner > section {
-        padding: 3em 0 1em 0;
+        padding: 0 0 0 0;
     }
 }
 #search form {
@@ -2586,11 +2607,24 @@ button:disabled,
 #sidebar > .inner {
     padding: 2.22222em 2.22222em 2.44444em 2.22222em;
     position: relative;
-    width: 26em;
+    width: 20em;
 }
 #sidebar > .inner > * {
     margin: 0 0 2em 0;
     padding: 0 0 1em 0;
+}
+#sidebar > .inner > .author-header {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin-top: 2em;
+    text-align: start;
+}
+#sidebar h3 {
+    font-size: 2.25em;
+    color: white;
+    margin-bottom: .5em;
+    line-height: 1.25em;
 }
 #sidebar > .inner > * > :last-child {
     margin-bottom: 0;
@@ -2662,7 +2696,7 @@ button:disabled,
     }
     #sidebar > .inner {
         padding: 1.66667em 1.66667em 1.33333em 1.66667em;
-        width: 24em;
+        width: 20em;
     }
     #sidebar > .inner > .alt {
         margin: -1.66667em 0 3.33333em -1.66667em;
@@ -2791,14 +2825,14 @@ button:disabled,
     }
 }
 #banner {
-    padding: 6em 0 4em 0;
+    padding: 0em 0 6em 0;
     display: -moz-flex;
     display: -webkit-flex;
     display: -ms-flex;
     display: flex;
 }
 #banner h1 {
-    margin-top: -0.125em;
+    margin-top: 0;
 }
 #banner .content {
     -moz-flex-grow: 1;
@@ -2821,7 +2855,7 @@ button:disabled,
     -ms-flex-shrink: 0;
     flex-shrink: 0;
     display: block;
-    margin: 0 0 2em 4em;
+    margin: 0 4em 0 0;
     width: 50%;
 }
 #banner .image img {
@@ -3011,7 +3045,7 @@ button:disabled,
     }
 }
 #banner {
-    border-bottom: solid 2px rgba(210, 215, 217, 0.75);
+    border-bottom: 0;
 }
 .content {
     max-width: 700px;
@@ -3042,7 +3076,6 @@ button:disabled,
     margin: 0 0 15px 0;
     width: 100px;
     height: 100px;
-    box-shadow: rgba(255, 255, 255, 0.1) 0 0 0 6px;
     display: block;
     background: #222;
     border-radius: 100%;
@@ -3138,6 +3171,7 @@ button:disabled,
     font-size: 0.8rem;
     line-height: 1.4em;
     text-align: center;
+    margin-top: 1em;
 }
 .kg-width-wide {
     position: relative;
@@ -3196,9 +3230,7 @@ button:disabled,
 .kg-gallery-container {
     display: flex;
     flex-direction: column;
-    margin-left: -6rem;
-    margin-right: -6rem;
-    width: calc(100% + 12rem);
+    width: 100%;
 }
 @media screen and (max-width: 1280px) {
     .kg-gallery-container {

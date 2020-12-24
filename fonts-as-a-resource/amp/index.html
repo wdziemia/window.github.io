@@ -14,16 +14,20 @@
     <meta property="og:title" content="Fonts as a Resource">
     <meta property="og:description" content="The introduction of API 26 brought a lot of great features to the Android OS. One specific feature that has been lacking (and a thorn in my…">
     <meta property="og:url" content="https://medium.com/@wdziemia/fonts-as-a-resource-4e6cc6fc5750">
+    <meta property="og:image" content="//wdziemia.github.io/content/images/2020/12/Screen-Shot-2020-12-23-at-9.10.25-PM.png">
     <meta property="article:published_time" content="2017-10-30T00:00:00.000Z">
-    <meta property="article:modified_time" content="2020-12-23T18:19:19.000Z">
-    <meta name="twitter:card" content="summary">
+    <meta property="article:modified_time" content="2020-12-24T02:10:32.000Z">
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Fonts as a Resource">
     <meta name="twitter:description" content="The introduction of API 26 brought a lot of great features to the Android OS. One specific feature that has been lacking (and a thorn in my…">
     <meta name="twitter:url" content="https://medium.com/@wdziemia/fonts-as-a-resource-4e6cc6fc5750">
+    <meta name="twitter:image" content="//wdziemia.github.io/content/images/2020/12/Screen-Shot-2020-12-23-at-9.10.25-PM.png">
     <meta name="twitter:label1" content="Written by">
     <meta name="twitter:data1" content="Walter Dziemianczyk">
     <meta name="twitter:site" content="@wdziemia">
     <meta name="twitter:creator" content="@wdziemia">
+    <meta property="og:image:width" content="1688">
+    <meta property="og:image:height" content="872">
     
     <script type="application/ld+json">
 {
@@ -57,7 +61,13 @@
     "headline": "Fonts as a Resource",
     "url": "//wdziemia.github.io/fonts-as-a-resource/",
     "datePublished": "2017-10-30T00:00:00.000Z",
-    "dateModified": "2020-12-23T18:19:19.000Z",
+    "dateModified": "2020-12-24T02:10:32.000Z",
+    "image": {
+        "@type": "ImageObject",
+        "url": "//wdziemia.github.io/content/images/2020/12/Screen-Shot-2020-12-23-at-9.10.25-PM.png",
+        "width": 1688,
+        "height": 872
+    },
     "description": "\nThe introduction of API 26 brought a lot of great features to the Android OS. One specific feature that has been lacking (and a thorn in my…\n",
     "mainEntityOfPage": {
         "@type": "WebPage",
@@ -652,6 +662,9 @@
                     <time class="post-date" datetime="2017-10-30">30 Oct 2017</time>
                 </section>
             </header>
+            <figure class="post-image">
+                <amp-img src="//wdziemia.github.io/content/images/2020/12/Screen-Shot-2020-12-23-at-9.10.25-PM.png" width="600" height="340" layout="responsive"></amp-img>
+            </figure>
             <section class="post-content">
 
                 <p>The introduction of API 26 brought a lot of great features to the Android OS. One specific feature that has been lacking (and a thorn in my side) is proper font support. If you were lucky enough to just need legacy support, like Roboto, then something like <a href="https://github.com/johnkil"><em>johnkil</em></a><em>/</em><a href="https://github.com/johnkil/Android-RobotoTextView"><em>Android-RobotoTextView</em></a> would suffice. However, different projects have unique design languages which translates to various typefaces. These same typefaces are not bundled with the Android OS by default, finding yourself in a situation with having to roll your own solution. To top that off, you could never preview the typeface in question in the IDE layout editor.</p><h3 id="before-api-26">Before API 26</h3><p>If you wanted to roll your own fonts you’d probably do something like the following:</p><p><strong>Step 1. </strong>Add your OTF/TTF files to assets<br><strong>Step 2.</strong> Create a custom view to support said OTF/TTF files<br><strong>Step 3.</strong> Create some construct in XML to reference each file to then reference in your Layout files<br><strong>Step 4.</strong> Create style attributes for your <code>View</code> that support said construct<br><strong>Step 5. </strong>Read in the typeface value and fetch that typeface within your <code>View</code><br><strong>Step 6.</strong> Cache that typeface in some sort of static map to prevent loading in the same font file multiple time<br><strong>Step 7.</strong> Made sure to prevent fetching typeface if <code>View.isInEditMode()</code> returns true so that the editor is able to render the view…with the typeface actually rendering<br><strong>Step 8.</strong> Create any subclasses of <code>TextView</code> you’d need (e.g. <code>EditText</code>, <code>Button</code>) to enable font support for those <code>View</code> elements.<br><strong>Step 9.</strong> Profit??</p><p>With the introduction of <code>DataBinding</code>, that process is cut down by a bit. You wouldn’t need to roll your own custom view anymore but you’d still be responsible for caching the typeface file. On top of that, the hassle around adding and referencing each typeface file is still there.</p><h3 id="api-26-">API 26+</h3><p>With API 26, supporting fonts are drastically simpler to do.</p><p><strong>Step 1.</strong> Add your OTF/TTF files to <code>res/font</code><br><strong>Step 2.</strong> Reference that file using <code>android:fontFamily</code> attribute on anything that extends <code>TextView</code>. (e.g <code>android:fontFamily="@font/comic_sans"</code>)</p><p>Thats it, the typefaces are cached internally and it works on all subclasses of <code>TextView</code> out of the box … all the way back to <em>API 14!</em></p><p><a href="https://developer.android.com/guide/topics/ui/look-and-feel/fonts-in-xml.html">More info here</a>.</p><p><em><strong>Time to apply comic-sans to all the things!</strong></em></p><hr><p><strong>Small note:</strong> Let’s say you find yourself interrogating a TypedArray for a font but are on an API &lt; 26. Instead of calling <em><code>TypedArray.getFont() //API 26)</code> </em>you can get the font resource id via <em><code>TypedArray.getResourceId()</code> </em>and fetch the resource using<em> <code>ResourcesCompat.getFont()</code>.</em></p><p>Enjoy!
