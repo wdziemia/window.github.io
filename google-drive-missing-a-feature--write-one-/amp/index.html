@@ -14,16 +14,20 @@
     <meta property="og:title" content="Google Drive missing a feature? Write one.">
     <meta property="og:description" content="If you’re not familiar with Google Scripts, check it out. Its pretty cool tool to let you automate tasks for various Google services. When…">
     <meta property="og:url" content="https://medium.com/@wdziemia/google-drive-missing-a-feature-write-one-563a2ae64ba6">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1553895501-af9e282e7fc1?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=MXwxMTc3M3wwfDF8c2VhcmNofDh8fEdvb2dsZXxlbnwwfHx8&amp;ixlib=rb-1.2.1&amp;q=80&amp;w=2000">
     <meta property="article:published_time" content="2016-07-27T00:00:00.000Z">
-    <meta property="article:modified_time" content="2020-12-23T18:05:30.000Z">
-    <meta name="twitter:card" content="summary">
+    <meta property="article:modified_time" content="2020-12-25T21:05:56.000Z">
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Google Drive missing a feature? Write one.">
     <meta name="twitter:description" content="If you’re not familiar with Google Scripts, check it out. Its pretty cool tool to let you automate tasks for various Google services. When…">
     <meta name="twitter:url" content="https://medium.com/@wdziemia/google-drive-missing-a-feature-write-one-563a2ae64ba6">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1553895501-af9e282e7fc1?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=MXwxMTc3M3wwfDF8c2VhcmNofDh8fEdvb2dsZXxlbnwwfHx8&amp;ixlib=rb-1.2.1&amp;q=80&amp;w=2000">
     <meta name="twitter:label1" content="Written by">
     <meta name="twitter:data1" content="Walter Dziemianczyk">
     <meta name="twitter:site" content="@wdziemia">
     <meta name="twitter:creator" content="@wdziemia">
+    <meta property="og:image:width" content="2000">
+    <meta property="og:image:height" content="1333">
     
     <script type="application/ld+json">
 {
@@ -45,7 +49,7 @@
         "name": "Walter Dziemianczyk",
         "image": {
             "@type": "ImageObject",
-            "url": "//wdziemia.github.io/content/images/2020/12/Group-1.png",
+            "url": "//wdziemia.github.io/content/images/2020/12/3921079.jpeg",
             "width": 433,
             "height": 433
         },
@@ -57,7 +61,13 @@
     "headline": "Google Drive missing a feature? Write one.",
     "url": "//wdziemia.github.io/google-drive-missing-a-feature--write-one-/",
     "datePublished": "2016-07-27T00:00:00.000Z",
-    "dateModified": "2020-12-23T18:05:30.000Z",
+    "dateModified": "2020-12-25T21:05:56.000Z",
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://images.unsplash.com/photo-1553895501-af9e282e7fc1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwxMTc3M3wwfDF8c2VhcmNofDh8fEdvb2dsZXxlbnwwfHx8&ixlib=rb-1.2.1&q=80&w=2000",
+        "width": 2000,
+        "height": 1333
+    },
     "description": "\nIf you’re not familiar with Google Scripts, check it out. Its pretty cool tool to let you automate tasks for various Google services. When…\n",
     "mainEntityOfPage": {
         "@type": "WebPage",
@@ -652,6 +662,9 @@
                     <time class="post-date" datetime="2016-07-27">27 Jul 2016</time>
                 </section>
             </header>
+            <figure class="post-image">
+                <amp-img src="https://images.unsplash.com/photo-1553895501-af9e282e7fc1?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=MXwxMTc3M3wwfDF8c2VhcmNofDh8fEdvb2dsZXxlbnwwfHx8&amp;ixlib=rb-1.2.1&amp;q=80&amp;w=2000" width="600" height="340" layout="responsive"></amp-img>
+            </figure>
             <section class="post-content">
 
                 <p>If you’re not familiar with Google Scripts, <a href="https://www.google.com/script/start/">check it out</a>. Its pretty cool tool to let you automate tasks for various Google services. When I signed up for the LIRR train alert email service, I quickly found out that they come in fairly often. I had a filter that applied a label and skipped inbox which worked well, the only thing is, I would have to go in and manually delete after they accumulated. This is when I used my Google-fu to find a way of automating that task. Once I found Google Scripts, I wrote a short script to delete emails after 24 hours who were tagged with a “LIRR” label. Perfect👌.</p><hr><p>So … guess what? You can’t get email notifications for specific folders on Google Drive.</p><figure class="kg-card kg-image-card"></figure><p>Right Ryan Reynolds, what if we could? What if my buddy Jimmy-Bob wanted to add a few files of shark-kittens to a shared folder of ours and not have to tell me manually(😵). No dice…..UNTIL NOW!</p><p>So basic idea: Create a place to a read/write a time stamp. If a file was updated after that timestamp, send an email to a list of email addresses. Simple enough, lets do this 😎.</p><hr><pre><code class="language-javascript">var folderName = ‘kittens’; 

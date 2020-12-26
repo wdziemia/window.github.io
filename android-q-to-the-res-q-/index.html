@@ -21,20 +21,20 @@
     <meta property="og:title" content="Android Q to the Res-Q!">
     <meta property="og:description" content="An intro to RoleManager! And a title with terrible pun for an article that has nothing to do with Resources!">
     <meta property="og:url" content="https://medium.com/@wdziemia/android-q-to-the-res-q-9a88733aedda">
-    <meta property="og:image" content="//wdziemia.github.io/content/images/downloaded_images/Android-Q-to-the-Res-Q-/1-96egkHkg2_sBtf10nPxOXQ.jpeg">
+    <meta property="og:image" content="//wdziemia.github.io/content/images/2020/12/1024px-Android_Q_Logo.svg.png">
     <meta property="article:published_time" content="2019-03-29T00:00:00.000Z">
-    <meta property="article:modified_time" content="2020-12-23T17:14:47.000Z">
+    <meta property="article:modified_time" content="2020-12-25T23:57:37.000Z">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Android Q to the Res-Q!">
     <meta name="twitter:description" content="An intro to RoleManager! And a title with terrible pun for an article that has nothing to do with Resources!">
     <meta name="twitter:url" content="https://medium.com/@wdziemia/android-q-to-the-res-q-9a88733aedda">
-    <meta name="twitter:image" content="//wdziemia.github.io/content/images/downloaded_images/Android-Q-to-the-Res-Q-/1-96egkHkg2_sBtf10nPxOXQ.jpeg">
+    <meta name="twitter:image" content="//wdziemia.github.io/content/images/2020/12/1024px-Android_Q_Logo.svg.png">
     <meta name="twitter:label1" content="Written by">
     <meta name="twitter:data1" content="Walter Dziemianczyk">
     <meta name="twitter:site" content="@wdziemia">
     <meta name="twitter:creator" content="@wdziemia">
-    <meta property="og:image:width" content="800">
-    <meta property="og:image:height" content="533">
+    <meta property="og:image:width" content="1024">
+    <meta property="og:image:height" content="1042">
     
     <script type="application/ld+json">
 {
@@ -56,7 +56,7 @@
         "name": "Walter Dziemianczyk",
         "image": {
             "@type": "ImageObject",
-            "url": "//wdziemia.github.io/content/images/2020/12/Group-1.png",
+            "url": "//wdziemia.github.io/content/images/2020/12/3921079.jpeg",
             "width": 433,
             "height": 433
         },
@@ -68,12 +68,12 @@
     "headline": "Android Q to the Res-Q!",
     "url": "//wdziemia.github.io/android-q-to-the-res-q-/",
     "datePublished": "2019-03-29T00:00:00.000Z",
-    "dateModified": "2020-12-23T17:14:47.000Z",
+    "dateModified": "2020-12-25T23:57:37.000Z",
     "image": {
         "@type": "ImageObject",
-        "url": "//wdziemia.github.io/content/images/downloaded_images/Android-Q-to-the-Res-Q-/1-96egkHkg2_sBtf10nPxOXQ.jpeg",
-        "width": 800,
-        "height": 533
+        "url": "//wdziemia.github.io/content/images/2020/12/1024px-Android_Q_Logo.svg.png",
+        "width": 1024,
+        "height": 1042
     },
     "description": "An intro to RoleManager! And a title with terrible pun for an article that has nothing to do with Resources!\n",
     "mainEntityOfPage": {
@@ -103,7 +103,7 @@
 </p>
     </header>
 
-    <div class="image main"><img src="../content/images/downloaded_images/Android-Q-to-the-Res-Q-/1-96egkHkg2_sBtf10nPxOXQ.jpeg" alt="Android Q to the Res-Q!"></div>
+    <div class="image main"><img src="../content/images/2020/12/1024px-Android_Q_Logo.svg.png" alt="Android Q to the Res-Q!"></div>
 
     <div class="content">
         <h3 id="an-intro-to-rolemanager-and-a-terrible-pun-that-has-nothing-to-do-with-resources-">An intro to RoleManager! And a terrible pun that has nothing to do with Resources!</h3><p>Android Q Preview was released recently, inviting developers to start testing and supporting new APIs! One of these APIs is <code>RoleManager</code>, and as we can gather from the Q-preview documentation:</p><blockquote>Android Q introduces a standard facility, <em>roles</em>, that allows the OS to grant apps elevated access to system functions based on well-understood use cases. Semantically, each role represents a common use case, such as playing music, viewing photos in a gallery, or sending SMS messages. If an app loses its role, this elevated access is also revoked. (<a href="https://developer.android.com/reference/android/app/role/RoleManager.html">Link</a>)</blockquote><p>In plain english, a role is basically a type of app that executes a specific function (e.g. web browser). The roles exposed in the Q preview are Browser, Dialer, Emergency, Gallery, Home, Music, and SMS. As a developer, you can now request to hold one of these roles for your app, if it falls into one of those buckets.</p><h3 id="why-is-this-api-helpful"><strong>Why is this API helpful?</strong></h3><p>This now lets us proactively query the system to see if our app is the default. If not, it lets us request permission, from the user, to hold that role. We now have more control over checking and responding to these sorts of events. No more silly hacks, no more trying to resolve your package name with the PackageManager, no more searching for options in settings! (🎉🎉🎉)</p><h3 id="what-s-the-catch"><strong>What’s the catch?</strong></h3><p>For the <code>RoleManager</code> to resolve a request properly, your Manifest must specify categories, permissions, or additional intent filters for the role to properly be held. The request will be automatically canceled if you fail to do so. For example, if we have an Internet Browser, we must define the <code>CATEGORY_APP_BROWSER</code> inside the <code>IntentFilter</code> for your Launcher activity. If we do not, and we request a role via <code>RoleManager</code>, that request will be denied without ever prompting the user.</p><h3 id="how-do-we-use-it-well-it-s-quite-simple-"><strong>How do we use it? Well, </strong>It’s quite simple!</h3><p><strong>Step 0</strong>. We add any necessary categories, IntentFilters, or Permissions in your Manifest!</p><p><strong>Step 1. </strong>Answer this question: Do we have an app that fits into a pre-defined role? If yes, let’s go to <strong>Step 2</strong>. If no, let’s enjoy some ice cream!</p><p><strong>Step 2.</strong> Is this Role available on the current system? We can check this via the `RoleManager` class.</p><pre><code class="language-Kotlin">val roleManager = getSystemService(RoleManager::class.java)
@@ -177,7 +177,7 @@ fun Context.openAssist() {
 
               
                 <section class="author-header">
-                        <img class="author-profile-image" src="../content/images/2020/12/Group-1.png" alt="Walter Dziemianczyk">
+                        <img class="author-profile-image" src="../content/images/2020/12/3921079.jpeg" alt="Walter Dziemianczyk">
                     <h3>Walter Dziemianczyk</h3>       
                     <div>Senior Software Engineer<br>New York, New York</div>
 
